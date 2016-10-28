@@ -13,4 +13,8 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <string name="Complete">成功</string>
+    <string name="Upload">登录</string>
+    <string name="Error">失败</string>
 </resources>
