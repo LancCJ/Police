@@ -4,8 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CloudPolice/CloudPolice.iml" filepath="$PROJECT_DIR$/CloudPolice/CloudPolice.iml" />
       <module fileurl="file://$PROJECT_DIR$/Police.iml" filepath="$PROJECT_DIR$/Police.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Police.iml" filepath="$PROJECT_DIR$/Police.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>
