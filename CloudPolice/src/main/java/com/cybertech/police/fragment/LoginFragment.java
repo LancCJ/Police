@@ -6,9 +6,11 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
+import com.alibaba.fastjson.JSON;
 import com.cybertech.police.R;
 import com.cybertech.police.base.BaseFragment;
 import com.cybertech.police.model.login.LoginParams;
+import com.cybertech.police.model.login.LoginRequest;
 import com.cybertech.police.model.login.LoginResponse;
 
 import org.xutils.common.Callback;
@@ -17,8 +19,6 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
-
-import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -129,17 +129,22 @@ public class LoginFragment extends BaseFragment {
         @Override
         protected Boolean doInBackground(Void... params) {
                 //组装请求参数
+                LoginRequest loginRequest=new LoginRequest();
                 LoginParams loginParams=new LoginParams();
+                loginParams.setUserName(mUsername);
+                loginParams.setUserPwd(mPassword);
+                //查询参数设置
+                loginRequest.setBodyContent(JSON.toJSONString(loginParams));
+                //loginRequest.addParameter("test1",mUsername);
                 //发送请求
-                loginParams.setBodyContent("{\"userName\":mUsername,\"userPwd\":mPassword}");   //json数据
                 Callback.Cancelable cancelable
-                        = x.http().get(loginParams,
-                        new Callback.CommonCallback<List<LoginResponse>>() {
+                        = x.http().get(loginRequest,
+                        new Callback.CommonCallback<LoginResponse>() {
                             @Override
-                            public void onSuccess(List<LoginResponse> result) {
+                            public void onSuccess(LoginResponse result) {
                                 new SweetAlertDialog(getActivity(), SweetAlertDialog.SUCCESS_TYPE)
                                         .setTitleText("系统提示框")
-                                        .setContentText(result.get(0).toString())
+                                        .setContentText(result.getUserName())
                                         .show();
                                 btnLogin.setProgress(0); // set progress to 0 to switch back to normal state
                                 LoginRequestflag=true;
