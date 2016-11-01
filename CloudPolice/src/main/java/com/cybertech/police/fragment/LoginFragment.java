@@ -1,23 +1,24 @@
-package com.cybertech.police;
+package com.cybertech.police.fragment;
 
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import com.cybertech.police.base.BaseActivity;
+import com.cybertech.police.R;
+import com.cybertech.police.base.BaseFragment;
+import com.cybertech.police.model.login.LoginParams;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
- * 警务云登录界面
+ * Created by 健 on 2016/11/1.
  */
-@ContentView(R.layout.activity_login)
-public class LoginActivity extends BaseActivity {
 
+@ContentView(R.layout.fragment_login)
+public class LoginFragment extends BaseFragment {
     /**
      * 登录按钮
      */
@@ -37,11 +38,6 @@ public class LoginActivity extends BaseActivity {
      */
     @ViewInject(R.id.password)
     private EditText mPasswordView;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     /**
      * 登录按钮 绑定 登录事件
@@ -122,14 +118,15 @@ public class LoginActivity extends BaseActivity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-
             try {
-                // Simulate network access.
+                //组装请求参数
+                LoginParams loginParams=new LoginParams();
+                //发送请求
+
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 return false;
             }
-
             return true;
         }
 
@@ -138,17 +135,17 @@ public class LoginActivity extends BaseActivity {
             mAuthTask = null;
 
             if (success) {
-            btnLogin.setProgress(100); // set progress to 100 or -1 to indicate complete or error state
-            btnLogin.setProgress(0); // set progress to 0 to switch back to normal state
+                btnLogin.setProgress(100); // set progress to 100 or -1 to indicate complete or error state
+                btnLogin.setProgress(0); // set progress to 0 to switch back to normal state
 
-            new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                new SweetAlertDialog(getActivity(), SweetAlertDialog.SUCCESS_TYPE)
                         .setTitleText("系统提示框")
                         .setContentText("登录成功")
                         .show();
-        } else {
-            mPasswordView.setError(getString(R.string.error_incorrect_password));
-            mPasswordView.requestFocus();
-        }
+            } else {
+                mPasswordView.setError(getString(R.string.error_incorrect_password));
+                mPasswordView.requestFocus();
+            }
         }
 
         @Override
@@ -157,4 +154,3 @@ public class LoginActivity extends BaseActivity {
         }
     }
 }
-
