@@ -1,5 +1,7 @@
 package com.cybertech.police.model.login;
 
+import com.cybertech.police.base.BaseResponseParser;
+
 import org.xutils.http.annotation.HttpResponse;
 
 /**
@@ -15,7 +17,7 @@ import org.xutils.http.annotation.HttpResponse;
  * 第二个泛型参数需要在prepare方法中实现.
  * (LoaderFactory中已经默认提供了部分常用类型的转换实现, 其他类型需要自己注册.)
  */
-@HttpResponse(parser = LoginResponseParser.class)
+@HttpResponse(parser = BaseResponseParser.class)
 public class LoginResponse {
     private String userName;
     private String reaylName;
