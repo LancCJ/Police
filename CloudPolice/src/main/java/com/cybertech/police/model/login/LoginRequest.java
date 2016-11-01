@@ -19,5 +19,6 @@ public class LoginRequest extends RequestParams {
 
     public LoginRequest() {
         this.setAsJsonContent(true); // 请求body将参数转换为json形式发送
+        this.addHeader("ClientType","Android");
     }
 }

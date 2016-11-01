@@ -105,12 +105,12 @@ public class LoginFragment extends BaseFragment {
     }
 
     /**
-     * 校验密码位数是否超过8位
+     * 校验密码位数是否超过6位
      * @param password
      * @return
      */
     private boolean isPasswordValid(String password) {
-        return password.length() > 8;
+        return password.length() > 6;
     }
 
     /**
@@ -128,14 +128,14 @@ public class LoginFragment extends BaseFragment {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-                //组装请求参数
+                //创建登录请求
                 LoginRequest loginRequest=new LoginRequest();
+                //组装请求参数
                 LoginParams loginParams=new LoginParams();
                 loginParams.setUserName(mUsername);
                 loginParams.setUserPwd(mPassword);
-                //查询参数设置
+                //设置查询参数到BodyContent
                 loginRequest.setBodyContent(JSON.toJSONString(loginParams));
-                //loginRequest.addParameter("test1",mUsername);
                 //发送请求
                 Callback.Cancelable cancelable
                         = x.http().get(loginRequest,
