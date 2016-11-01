@@ -5,12 +5,21 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+
 import com.cybertech.police.R;
 import com.cybertech.police.base.BaseFragment;
 import com.cybertech.police.model.login.LoginParams;
+import com.cybertech.police.model.login.LoginResponse;
+
+import org.xutils.common.Callback;
+import org.xutils.ex.HttpException;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
+
+import java.util.List;
+
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
@@ -19,6 +28,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 @ContentView(R.layout.fragment_login)
 public class LoginFragment extends BaseFragment {
+    private boolean LoginRequestflag=false;
     /**
      * 登录按钮
      */
@@ -118,16 +128,57 @@ public class LoginFragment extends BaseFragment {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            try {
                 //组装请求参数
                 LoginParams loginParams=new LoginParams();
                 //发送请求
+                loginParams.setBodyContent("{\"userName\":mUsername,\"userPwd\":mPassword}");   //json数据
+                Callback.Cancelable cancelable
+                        = x.http().get(loginParams,
+                        new Callback.CommonCallback<List<LoginResponse>>() {
+                            @Override
+                            public void onSuccess(List<LoginResponse> result) {
+                                new SweetAlertDialog(getActivity(), SweetAlertDialog.SUCCESS_TYPE)
+                                        .setTitleText("系统提示框")
+                                        .setContentText(result.get(0).toString())
+                                        .show();
+                                btnLogin.setProgress(0); // set progress to 0 to switch back to normal state
+                                LoginRequestflag=true;
+                            }
+                            @Override
+                            public void onError(Throwable ex, boolean isOnCallback) {
+                                if (ex instanceof HttpException) { // 网络错误
+                                    HttpException httpEx = (HttpException) ex;
+                                    int responseCode = httpEx.getCode();
+                                    String responseMsg = httpEx.getMessage();
+                                    String errorResult = httpEx.getResult();
+                                    new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                                            .setTitleText("系统提示框")
+                                            .setContentText(responseMsg+errorResult)
+                                            .show();
+                                } else { // 其他错误
+                                    new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                                            .setTitleText("系统提示框")
+                                            .setContentText(ex.getMessage())
+                                            .show();
+                                }
+                                btnLogin.setProgress(0); // set progress to 0 to switch back to normal state
+                            }
 
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-            return true;
+                            @Override
+                            public void onCancelled(CancelledException cex) {
+                                btnLogin.setProgress(0); // set progress to 0 to switch back to normal state
+                                new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                                        .setTitleText("系统提示框")
+                                        .setContentText("取消网络请求")
+                                        .show();
+                            }
+
+                            @Override
+                            public void onFinished() {
+                            }
+                        });
+                //cancelable.cancel(); // 取消请求
+            return LoginRequestflag;
         }
 
         @Override

@@ -9,7 +9,7 @@ public class Constant {
     /**
      * 系统服务地址
      */
-    public static final String serverHostUrl="http://localhost/";
+    public static final String serverHostUrl="http://192.168.0.100/services";
     /**
      * 用户登录请求
      * 登录发送报文:
@@ -17,5 +17,5 @@ public class Constant {
      * 登录返回报文:
      *     {}
      */
-    public static final String loginUrl="services/user/login.json";
+    public static final String userLoginUrl="user/login.json";
 }
