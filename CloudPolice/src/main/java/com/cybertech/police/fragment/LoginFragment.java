@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-
 import com.alibaba.fastjson.JSON;
 import com.cybertech.police.R;
 import com.cybertech.police.base.BaseFragment;
@@ -13,14 +12,12 @@ import com.cybertech.police.base.Constant;
 import com.cybertech.police.model.login.LoginBaseResponse;
 import com.cybertech.police.model.login.LoginParams;
 import com.cybertech.police.model.login.LoginRequest;
-
 import org.xutils.common.Callback;
 import org.xutils.ex.HttpException;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
-
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
