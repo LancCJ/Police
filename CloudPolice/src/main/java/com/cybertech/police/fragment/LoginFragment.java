@@ -5,21 +5,19 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-
 import com.alibaba.fastjson.JSON;
 import com.cybertech.police.R;
 import com.cybertech.police.base.BaseFragment;
+import com.cybertech.police.base.Constant;
 import com.cybertech.police.model.login.LoginParams;
 import com.cybertech.police.model.login.LoginRequest;
 import com.cybertech.police.model.login.LoginResponse;
-
 import org.xutils.common.Callback;
 import org.xutils.ex.HttpException;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
-
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
@@ -28,7 +26,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 @ContentView(R.layout.fragment_login)
 public class LoginFragment extends BaseFragment {
-    private boolean LoginRequestflag=false;
+    private boolean Loginflag=false;
     /**
      * 登录按钮
      */
@@ -135,19 +133,23 @@ public class LoginFragment extends BaseFragment {
                 loginParams.setUserName(mUsername);
                 loginParams.setUserPwd(mPassword);
                 //设置查询参数到BodyContent
-                loginRequest.setBodyContent(JSON.toJSONString(loginParams));
+                loginRequest.addBodyParameter("Params",JSON.toJSONString(loginParams));
+                //loginRequest.setBodyContent(json);
                 //发送请求
                 Callback.Cancelable cancelable
                         = x.http().get(loginRequest,
                         new Callback.CommonCallback<LoginResponse>() {
                             @Override
                             public void onSuccess(LoginResponse result) {
-                                new SweetAlertDialog(getActivity(), SweetAlertDialog.SUCCESS_TYPE)
-                                        .setTitleText("系统提示框")
-                                        .setContentText(result.getUserName())
-                                        .show();
+                                if(result.getCode()== Constant.USER_LOGIN_SUCCESS){
+                                    Loginflag=true;
+                                }else{
+                                    new SweetAlertDialog(getActivity(), SweetAlertDialog.SUCCESS_TYPE)
+                                            .setTitleText("系统提示框")
+                                            .setContentText(result.getMessage())
+                                            .show();
+                                }
                                 btnLogin.setProgress(0); // set progress to 0 to switch back to normal state
-                                LoginRequestflag=true;
                             }
                             @Override
                             public void onError(Throwable ex, boolean isOnCallback) {
@@ -183,25 +185,24 @@ public class LoginFragment extends BaseFragment {
                             }
                         });
                 //cancelable.cancel(); // 取消请求
-            return LoginRequestflag;
+            return Loginflag;
         }
 
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
-
             if (success) {
                 btnLogin.setProgress(100); // set progress to 100 or -1 to indicate complete or error state
                 btnLogin.setProgress(0); // set progress to 0 to switch back to normal state
-
                 new SweetAlertDialog(getActivity(), SweetAlertDialog.SUCCESS_TYPE)
                         .setTitleText("系统提示框")
-                        .setContentText("登录成功")
+                        .setContentText("登录OK")
                         .show();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
             }
+//            else {
+//                //mPasswordView.setError(getString(R.string.error_incorrect_password));
+//                //mPasswordView.requestFocus();
+//            }
         }
 
         @Override

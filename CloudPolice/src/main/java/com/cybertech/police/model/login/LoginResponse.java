@@ -1,7 +1,6 @@
 package com.cybertech.police.model.login;
 
 import com.cybertech.police.base.BaseResponseParser;
-
 import org.xutils.http.annotation.HttpResponse;
 
 /**
@@ -19,31 +18,31 @@ import org.xutils.http.annotation.HttpResponse;
  */
 @HttpResponse(parser = BaseResponseParser.class)
 public class LoginResponse {
-    private String userName;
-    private String reaylName;
-    private String phoneNum;
+    private Integer code;
+    private String message;
+    private LoginContent data;
 
-    public String getUserName() {
-        return userName;
+    public Integer getCode() {
+        return code;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setCode(Integer code) {
+        this.code = code;
     }
 
-    public String getReaylName() {
-        return reaylName;
+    public String getMessage() {
+        return message;
     }
 
-    public void setReaylName(String reaylName) {
-        this.reaylName = reaylName;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public String getPhoneNum() {
-        return phoneNum;
+    public LoginContent getData() {
+        return data;
     }
 
-    public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
+    public void setData(LoginContent data) {
+        this.data = data;
     }
 }
