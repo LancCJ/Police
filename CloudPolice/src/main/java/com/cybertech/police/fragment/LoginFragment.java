@@ -5,19 +5,22 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+
 import com.alibaba.fastjson.JSON;
 import com.cybertech.police.R;
 import com.cybertech.police.base.BaseFragment;
 import com.cybertech.police.base.Constant;
+import com.cybertech.police.model.login.LoginBaseResponse;
 import com.cybertech.police.model.login.LoginParams;
 import com.cybertech.police.model.login.LoginRequest;
-import com.cybertech.police.model.login.LoginResponse;
+
 import org.xutils.common.Callback;
 import org.xutils.ex.HttpException;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
+
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
@@ -61,9 +64,6 @@ public class LoginFragment extends BaseFragment {
      * 登录前验证
      */
     private void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
 
         // 重置errors
         mUsernameView.setError(null);
@@ -134,15 +134,20 @@ public class LoginFragment extends BaseFragment {
                 loginParams.setUserPwd(mPassword);
                 //设置查询参数到BodyContent
                 loginRequest.addBodyParameter("Params",JSON.toJSONString(loginParams));
-                //loginRequest.setBodyContent(json);
                 //发送请求
                 Callback.Cancelable cancelable
                         = x.http().get(loginRequest,
-                        new Callback.CommonCallback<LoginResponse>() {
+                        new Callback.CommonCallback<LoginBaseResponse>() {
                             @Override
-                            public void onSuccess(LoginResponse result) {
+                            public void onSuccess(LoginBaseResponse result) {
                                 if(result.getCode()== Constant.USER_LOGIN_SUCCESS){
                                     Loginflag=true;
+                                    btnLogin.setProgress(100); // set progress to 100 or -1 to indicate complete or error state
+                                    new SweetAlertDialog(getActivity(), SweetAlertDialog.SUCCESS_TYPE)
+                                            .setTitleText("系统提示框")
+                                            .setContentText("用户:"+result.getData().getUserName()+" "+
+                                                            "真名:"+result.getData().getReaylName())
+                                            .show();
                                 }else{
                                     new SweetAlertDialog(getActivity(), SweetAlertDialog.SUCCESS_TYPE)
                                             .setTitleText("系统提示框")
@@ -184,30 +189,7 @@ public class LoginFragment extends BaseFragment {
                             public void onFinished() {
                             }
                         });
-                //cancelable.cancel(); // 取消请求
             return Loginflag;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            if (success) {
-                btnLogin.setProgress(100); // set progress to 100 or -1 to indicate complete or error state
-                btnLogin.setProgress(0); // set progress to 0 to switch back to normal state
-                new SweetAlertDialog(getActivity(), SweetAlertDialog.SUCCESS_TYPE)
-                        .setTitleText("系统提示框")
-                        .setContentText("登录OK")
-                        .show();
-            }
-//            else {
-//                //mPasswordView.setError(getString(R.string.error_incorrect_password));
-//                //mPasswordView.requestFocus();
-//            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
         }
     }
 }
