@@ -22,13 +22,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity
-            android:name=".MainActivity">
+        <!--应用启动画面-->
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--应用登录界面-->
+        <activity android:name=".LoginActivity"/>
         </application>
-
 </manifest>
