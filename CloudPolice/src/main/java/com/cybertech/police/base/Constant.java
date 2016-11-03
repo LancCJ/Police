@@ -9,7 +9,7 @@ public class Constant {
     /**
      * 系统服务地址
      */
-    public static final String serverHostUrl="http://192.168.0.100/services";
+    public static final String serverHostUrl="http://192.168.142.1/services";
     /**
      * 用户登录请求
      * 登录发送报文:

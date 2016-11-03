@@ -1,5 +1,6 @@
 package com.cybertech.police;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.view.View;
@@ -138,11 +139,11 @@ public class LoginActivity extends BaseActivity {
                             if(result.getCode()== Constant.USER_LOGIN_SUCCESS){
                                 Loginflag=true;
                                 btnLogin.setProgress(100); // set progress to 100 or -1 to indicate complete or error state
-                                new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.SUCCESS_TYPE)
-                                        .setTitleText("系统提示框")
-                                        .setContentText("用户:"+result.getData().getUserName()+" "+
-                                                "真名:"+result.getData().getReaylName())
-                                        .show();
+
+                                Intent intent = new Intent (LoginActivity.this,MainActivity.class);
+                                startActivity(intent);
+
+
                             }else{
                                 new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                                         .setTitleText("系统提示框")

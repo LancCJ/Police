@@ -1,8 +1,8 @@
 package com.cybertech.police;
 
-import android.os.Handler;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import com.cybertech.police.base.BaseActivity;
 import org.xutils.view.annotation.ContentView;
 
@@ -11,6 +11,7 @@ import org.xutils.view.annotation.ContentView;
  */
 @ContentView(R.layout.activity_splash)
 public class SplashActivity extends BaseActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

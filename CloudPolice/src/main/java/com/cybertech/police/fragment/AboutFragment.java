@@ -2,7 +2,6 @@ package com.cybertech.police.fragment;
 
 import com.cybertech.police.R;
 import com.cybertech.police.base.BaseFragment;
-
 import org.xutils.view.annotation.ContentView;
 
 /**
@@ -10,6 +9,6 @@ import org.xutils.view.annotation.ContentView;
  */
 
 @ContentView(R.layout.activity_login)
-public class LoginFragment extends BaseFragment {
+public class AboutFragment extends BaseFragment {
 
 }
