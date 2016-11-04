@@ -14,6 +14,9 @@ import android.view.View;
 import com.cybertech.police.base.BaseActivity;
 import org.xutils.view.annotation.ContentView;
 
+/**
+ * 主界面
+ */
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {

@@ -6,7 +6,7 @@ import android.os.Handler;
 import com.cybertech.police.base.BaseActivity;
 import org.xutils.view.annotation.ContentView;
 
-/**
+/**启动界面
  * Created by 健 on 2016/11/3.
  */
 @ContentView(R.layout.activity_splash)
