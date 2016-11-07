@@ -6,18 +6,21 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import com.alibaba.fastjson.JSON;
 import com.cybertech.police.base.BaseActivity;
 import com.cybertech.police.base.Constant;
 import com.cybertech.police.model.login.LoginBaseResponse;
 import com.cybertech.police.model.login.LoginParams;
 import com.cybertech.police.model.login.LoginRequest;
+
 import org.xutils.common.Callback;
 import org.xutils.ex.HttpException;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
+
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
@@ -54,6 +57,7 @@ public class LoginActivity extends BaseActivity {
             type = View.OnClickListener.class)
     private void onBtnLoginClick(View view) {
         attemptLogin();
+
     }
 
     /**
@@ -188,5 +192,7 @@ public class LoginActivity extends BaseActivity {
             return Loginflag;
         }
     }
+
+
 }
 
