@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+     <string name="nav_user_name">用户名</string>
+     <string name="nav_user_email">user@email.com</string>
+      <string name="nav_attention">关注</string>
+        <string name="nav_gather">采集</string>
+    <string name="nav_message">消息</string>
+    <string name="nav_friends">好友</string>
+    <string name="nav_used_scan">常用浏览</string>
+</resources>
