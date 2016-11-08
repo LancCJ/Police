@@ -1,4 +1,4 @@
-package com.cybertech.police.model.login;
+package com.cybertech.police.module.login.model;
 
 import com.cybertech.police.base.Constant;
 

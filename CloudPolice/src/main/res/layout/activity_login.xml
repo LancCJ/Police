@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="com.cybertech.police.LoginActivity"
+    tools:context="com.cybertech.police.module.login.LoginActivity"
     android:background="@drawable/login_bg"
     android:fitsSystemWindows="true"
     android:clipToPadding="true"  >

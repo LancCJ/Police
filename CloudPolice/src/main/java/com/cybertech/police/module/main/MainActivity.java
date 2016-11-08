@@ -1,4 +1,4 @@
-package com.cybertech.police;
+package com.cybertech.police.module.main;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,16 +14,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-
+import com.cybertech.police.R;
 import com.cybertech.police.base.BaseActivity;
 import com.cybertech.police.base.Constant;
 import com.cybertech.police.utils.CompatUtils;
 import com.cybertech.police.utils.SPUtils;
-
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
-
 import static com.cybertech.police.utils.SPUtils.FILE_NAME;
 import static com.cybertech.police.utils.SPUtils.MODE;
 

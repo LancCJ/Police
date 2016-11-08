@@ -1,4 +1,4 @@
-package com.cybertech.police.model.login;
+package com.cybertech.police.module.login.model;
 
 /**
  * Created by 健 on 2016/11/2.

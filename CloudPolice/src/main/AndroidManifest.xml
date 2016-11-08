@@ -22,7 +22,7 @@
         tools:replace="android:icon">
 
         <!-- 应用启动画面 -->
-        <activity android:name=".SplashActivity">
+        <activity android:name=".StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,9 +30,9 @@
             </intent-filter>
         </activity>
         <!-- 应用登录界面 -->
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".module.login.LoginActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".module.main.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme"></activity>
     </application>

@@ -1,4 +1,4 @@
-package com.cybertech.police;
+package com.cybertech.police.module.login;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -7,12 +7,14 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.alibaba.fastjson.JSON;
+import com.cybertech.police.R;
 import com.cybertech.police.base.BaseActivity;
 import com.cybertech.police.base.Constant;
-import com.cybertech.police.model.login.LoginBaseResponse;
-import com.cybertech.police.model.login.LoginParams;
-import com.cybertech.police.model.login.LoginRequest;
-import com.cybertech.police.model.login.LoginResponse;
+import com.cybertech.police.module.login.model.LoginBaseResponse;
+import com.cybertech.police.module.login.model.LoginParams;
+import com.cybertech.police.module.login.model.LoginRequest;
+import com.cybertech.police.module.login.model.LoginResponse;
+import com.cybertech.police.module.main.MainActivity;
 import com.cybertech.police.utils.SPBuild;
 import com.cybertech.police.utils.SPUtils;
 

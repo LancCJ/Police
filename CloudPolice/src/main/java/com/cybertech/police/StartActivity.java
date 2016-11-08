@@ -4,13 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import com.cybertech.police.base.BaseActivity;
+import com.cybertech.police.module.login.LoginActivity;
+
 import org.xutils.view.annotation.ContentView;
 
 /**启动界面
  * Created by 健 on 2016/11/3.
  */
 @ContentView(R.layout.activity_splash)
-public class SplashActivity extends BaseActivity {
+public class StartActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,9 +20,9 @@ public class SplashActivity extends BaseActivity {
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run(){
-                Intent intent = new Intent (SplashActivity.this,LoginActivity.class);
+                Intent intent = new Intent (StartActivity.this,LoginActivity.class);
                 startActivity(intent);
-                SplashActivity.this.finish();
+                StartActivity.this.finish();
             }
         }, 1000);
     }
