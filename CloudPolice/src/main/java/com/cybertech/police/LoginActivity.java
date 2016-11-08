@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.cybertech.police.base.BaseActivity;
@@ -13,6 +12,9 @@ import com.cybertech.police.base.Constant;
 import com.cybertech.police.model.login.LoginBaseResponse;
 import com.cybertech.police.model.login.LoginParams;
 import com.cybertech.police.model.login.LoginRequest;
+import com.cybertech.police.model.login.LoginResponse;
+import com.cybertech.police.utils.SPBuild;
+import com.cybertech.police.utils.SPUtils;
 
 import org.xutils.common.Callback;
 import org.xutils.ex.HttpException;
@@ -28,11 +30,11 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  */
 @ContentView(R.layout.activity_login)
 public class LoginActivity extends BaseActivity {
-    private boolean Loginflag=false;
+    private boolean Loginflag = false;
     /**
      * 登录按钮
      */
-    @ViewInject(R.id.btnLogin)
+    @ViewInject(R.id.btn_login)
     private com.dd.CircularProgressButton btnLogin;
     /**
      * 登录Task
@@ -41,23 +43,23 @@ public class LoginActivity extends BaseActivity {
     /**
      * 用户名
      */
-    @ViewInject(R.id.username)
-    private TextView mUsernameView;
+    @ViewInject(R.id.et_username)
+    private EditText mUsernameView;
     /**
      * 密码输入框
      */
-    @ViewInject(R.id.password)
+    @ViewInject(R.id.et_password)
     private EditText mPasswordView;
 
     /**
      * 登录按钮 绑定 登录事件
+     *
      * @param view
      */
-    @Event(value = R.id.btnLogin,
+    @Event(value = R.id.btn_login,
             type = View.OnClickListener.class)
     private void onBtnLoginClick(View view) {
         attemptLogin();
-
     }
 
     /**
@@ -104,6 +106,7 @@ public class LoginActivity extends BaseActivity {
 
     /**
      * 校验密码位数是否超过6位
+     *
      * @param password
      * @return
      */
@@ -127,9 +130,9 @@ public class LoginActivity extends BaseActivity {
         @Override
         protected Boolean doInBackground(Void... params) {
             //创建登录请求
-            LoginRequest loginRequest=new LoginRequest();
+            LoginRequest loginRequest = new LoginRequest();
             //组装请求参数
-            LoginParams loginParams=new LoginParams();
+            LoginParams loginParams = new LoginParams();
             loginParams.setUserName(mUsername);
             loginParams.setUserPwd(mPassword);
             //设置查询参数到BodyContent
@@ -140,15 +143,13 @@ public class LoginActivity extends BaseActivity {
                     new Callback.CommonCallback<LoginBaseResponse>() {
                         @Override
                         public void onSuccess(LoginBaseResponse result) {
-                            if(result.getCode()== Constant.USER_LOGIN_SUCCESS){
-                                Loginflag=true;
+                            if (result.getCode() == Constant.USER_LOGIN_SUCCESS) {
+                                Loginflag = true;
                                 btnLogin.setProgress(100); // set progress to 100 or -1 to indicate complete or error state
-
-                                Intent intent = new Intent (LoginActivity.this,MainActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                saveUserInfo(result.getData());
                                 startActivity(intent);
-
-
-                            }else{
+                            } else {
                                 new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                                         .setTitleText("系统提示框")
                                         .setContentText(result.getMessage())
@@ -156,6 +157,7 @@ public class LoginActivity extends BaseActivity {
                             }
                             btnLogin.setProgress(0); // set progress to 0 to switch back to normal state
                         }
+
                         @Override
                         public void onError(Throwable ex, boolean isOnCallback) {
                             if (ex instanceof HttpException) { // 网络错误
@@ -165,7 +167,7 @@ public class LoginActivity extends BaseActivity {
                                 String errorResult = httpEx.getResult();
                                 new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.WARNING_TYPE)
                                         .setTitleText("系统提示框")
-                                        .setContentText(responseMsg+errorResult)
+                                        .setContentText(responseMsg + errorResult)
                                         .show();
                             } else { // 其他错误
                                 new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.WARNING_TYPE)
@@ -190,6 +192,20 @@ public class LoginActivity extends BaseActivity {
                         }
                     });
             return Loginflag;
+        }
+
+        /**
+         * 保存用户信息到Sp
+         * @param userResponse
+         */
+        private void saveUserInfo(LoginResponse userResponse){
+            //保存先清空内容
+            SPUtils.clear(getApplicationContext());
+            new SPBuild(getApplicationContext())
+                    .addData(Constant.ISLOGIN, Boolean.TRUE)//登陆志位
+                    .addData(Constant.LOGINTIME, System.currentTimeMillis())//登陆时间
+                    .addData(Constant.USERACCOUNT, userResponse.getUserName())//账号
+                    .build();
         }
     }
 

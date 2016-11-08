@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/logo"
-        android:id="@+id/logo"
+        android:id="@+id/iv_logo"
         android:layout_weight="1"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -19,8 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="37dp"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/logo"
+        android:id="@+id/tv_version"
+        android:layout_below="@+id/iv_logo"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:textAlignment="center"/>
@@ -29,7 +29,7 @@
         android:text="产品:智能云警务平台"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView3"
+        android:id="@+id/tv_productName"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

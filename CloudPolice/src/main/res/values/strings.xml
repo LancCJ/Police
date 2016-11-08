@@ -19,5 +19,11 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">设置</string>
-
+    <string name="nav_user_name">username</string>
+    <string name="nav_user_email">user@email.com</string>
+    <string name="nav_attention">attention</string>
+    <string name="nav_gather">gather</string>
+    <string name="nav_message">message</string>
+    <string name="nav_friends">friend</string>
+    <string name="nav_used_scan">scan</string>
 </resources>

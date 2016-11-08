@@ -25,4 +25,13 @@ public class Constant {
     public static final Integer USER_LOGIN_PARAMS_NO_USERPWD = 105;//缺少密码
     public static final Integer USER_LOGIN_PARAMS_USERNAMENOTMATCHPWD = 106;//用户密码不匹配
     public static final Integer USER_LOGIN_SUCCESS = 107;//用户登录成功
+
+
+    public static final String EMPTY_STRING = "";
+    //user information
+    public static final String ISLOGIN = "isLogin";
+    public static final String LOGINTIME = "loginTime";
+    public static final String USERACCOUNT = "userAccount";
+    public static final String USERNAME = "userName";
+    public static final String USERID = "userID";
 }
