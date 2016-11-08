@@ -4,7 +4,7 @@ package com.cybertech.police.module.login.model;
  * Created by 健 on 2016/11/1.
  */
 
-public class LoginParams {
+public class LoginRequestParams {
     private String userName;
     private String userPwd;
 

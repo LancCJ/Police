@@ -10,8 +10,8 @@ import com.alibaba.fastjson.JSON;
 import com.cybertech.police.R;
 import com.cybertech.police.base.BaseActivity;
 import com.cybertech.police.base.Constant;
-import com.cybertech.police.module.login.model.LoginBaseResponse;
-import com.cybertech.police.module.login.model.LoginParams;
+import com.cybertech.police.module.login.model.LoginResponseBase;
+import com.cybertech.police.module.login.model.LoginRequestParams;
 import com.cybertech.police.module.login.model.LoginRequest;
 import com.cybertech.police.module.login.model.LoginResponse;
 import com.cybertech.police.module.main.MainActivity;
@@ -134,7 +134,7 @@ public class LoginActivity extends BaseActivity {
             //创建登录请求
             LoginRequest loginRequest = new LoginRequest();
             //组装请求参数
-            LoginParams loginParams = new LoginParams();
+            LoginRequestParams loginParams = new LoginRequestParams();
             loginParams.setUserName(mUsername);
             loginParams.setUserPwd(mPassword);
             //设置查询参数到BodyContent
@@ -142,9 +142,9 @@ public class LoginActivity extends BaseActivity {
             //发送请求
             Callback.Cancelable cancelable
                     = x.http().get(loginRequest,
-                    new Callback.CommonCallback<LoginBaseResponse>() {
+                    new Callback.CommonCallback<LoginResponseBase>() {
                         @Override
-                        public void onSuccess(LoginBaseResponse result) {
+                        public void onSuccess(LoginResponseBase result) {
                             if (result.getCode() == Constant.USER_LOGIN_SUCCESS) {
                                 Loginflag = true;
                                 btnLogin.setProgress(100); // set progress to 100 or -1 to indicate complete or error state
